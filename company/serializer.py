@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from .models import Company, SocialMedia, HappyClientAchievement, AwardWonAchievement, ProjectAchievement
+from .models import Company, SocialMedia, HappyClientAchievement, AwardWonAchievement, ProjectAchievement, WorkCompletedImage
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -9,6 +9,12 @@ class SocialMediaSerializer(ModelSerializer):
     class Meta:
         model = SocialMedia
         fields = '__all__'
+
+
+class WorksCompletedSerializer(ModelSerializer):
+    class Meta:
+        model = WorkCompletedImage
+        fields = "__all__"
 
 
 class CompanySerializer(ModelSerializer):

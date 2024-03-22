@@ -59,5 +59,19 @@ class RetrieveAchievements(generics.ListAPIView):
         return Response(data=data, status=status.HTTP_200_OK)
 
 
+class RetrieveWorkCompleted(APIView):
+    def get(self, request, *args, **kwargs):
+        company_id = kwargs.get("pk")
+        company = get_object_or_404(Company, id=company_id)
+        works_completed_instance = WorkCompletedImage.objects.filter(
+            company=company)
+        serializer = WorksCompletedSerializer(
+            instance=works_completed_instance, many=True)
+        if serializer.data:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "No data found"}, status=status.HTTP_404_NOT_FOUND)
+
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = myTokenObtainPairSerializer
